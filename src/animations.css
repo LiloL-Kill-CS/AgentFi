@@ -1,0 +1,66 @@
+/* Micro-animations and Transitions */
+
+.animate-pulse-glow {
+    animation: pulse-glow 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+@keyframes pulse-glow {
+
+    0%,
+    100% {
+        opacity: 1;
+        box-shadow: 0 0 10px var(--border-glow);
+    }
+
+    50% {
+        opacity: 0.5;
+        box-shadow: 0 0 20px rgba(59, 130, 246, 0.6);
+    }
+}
+
+.animate-fade-in {
+    animation: fade-in 0.5s ease-out forwards;
+}
+
+@keyframes fade-in {
+    0% {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.hover-glow:hover {
+    border-color: var(--accent-blue);
+    box-shadow: 0 0 15px rgba(59, 130, 246, 0.15);
+    transform: translateY(-2px);
+    transition: all 0.3s ease;
+}
+
+.transition-all {
+    transition: all 0.3s ease;
+}
+
+/* Infinite Scroll for Market Ticker */
+.ticker-scroll {
+    animation: scroll-left 30s linear infinite;
+    display: inline-flex;
+}
+
+@keyframes scroll-left {
+    0% {
+        transform: translateX(0);
+    }
+
+    100% {
+        transform: translateX(-50%);
+    }
+}
+
+.ticker-scroll:hover {
+    animation-play-state: paused;
+}
