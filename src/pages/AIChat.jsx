@@ -7,7 +7,7 @@ const initialMessages = [
     {
         id: 1,
         sender: 'ai',
-        text: "Hello! I'm your AgentFi assistant powered by real-time market data. I can analyze assets using live technical indicators (RSI, SMA, EMA, Momentum), review your portfolio, or suggest strategies. Try asking me to 'Analyze BTC'!",
+        text: "Hello! I'm connected to your live AI trading agents. I can show you what they're doing in real-time, their positions, recent trades, and PnL. Try asking 'What are my agents doing?' or 'Show recent trades'!",
         time: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })
     }
 ];
@@ -123,6 +123,68 @@ const AIChat = () => {
                                         </div>
                                     )}
 
+                                    {/* Agents Report Card */}
+                                    {msg.type === 'agents_report' && msg.data && (
+                                        <div style={{ marginTop: '16px', padding: '16px', background: 'rgba(0,0,0,0.3)', borderRadius: '8px', border: '1px solid var(--border-color)' }}>
+                                            <div style={{ display: 'flex', gap: '12px', marginBottom: '16px' }}>
+                                                <div style={{ flex: 1, background: 'rgba(0,0,0,0.2)', padding: '8px', borderRadius: '6px', textAlign: 'center' }}>
+                                                    <div style={{ fontSize: '11px', color: 'var(--text-secondary)' }}>Total AUM</div>
+                                                    <div className="mono" style={{ fontSize: '16px', fontWeight: 700, color: 'var(--accent-cyan)' }}>{formatCurrency(msg.data.totalValue)}</div>
+                                                </div>
+                                                <div style={{ flex: 1, background: 'rgba(0,0,0,0.2)', padding: '8px', borderRadius: '6px', textAlign: 'center' }}>
+                                                    <div style={{ fontSize: '11px', color: 'var(--text-secondary)' }}>Combined PnL</div>
+                                                    <div className={`mono ${msg.data.totalPnl >= 0 ? 'text-green' : 'text-red'}`} style={{ fontSize: '16px', fontWeight: 700 }}>{formatCurrency(msg.data.totalPnl)}</div>
+                                                </div>
+                                            </div>
+                                            <div style={{ display: 'flex', flexDirection: 'column', gap: '10px' }}>
+                                                {msg.data.agents.map((a, i) => (
+                                                    <div key={i} style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '10px 12px', background: 'rgba(0,0,0,0.15)', borderRadius: '8px', fontSize: '13px' }}>
+                                                        <div style={{ flex: 2 }}>
+                                                            <div style={{ fontWeight: 600, marginBottom: '2px' }}>{a.name}</div>
+                                                            <div style={{ fontSize: '11px', color: 'var(--text-secondary)' }}>{a.strategy} • {a.positions}</div>
+                                                        </div>
+                                                        <div style={{ flex: 1, textAlign: 'center' }}>
+                                                            <div className="mono" style={{ color: a.winRate >= 50 ? 'var(--accent-green)' : 'var(--accent-gold)' }}>{a.winRate}% WR</div>
+                                                        </div>
+                                                        <div style={{ flex: 1, textAlign: 'right' }}>
+                                                            <div className={`mono ${a.pnl >= 0 ? 'text-green' : 'text-red'}`} style={{ fontWeight: 600 }}>
+                                                                {a.pnl >= 0 ? '+' : ''}{formatCurrency(a.pnl)}
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                ))}
+                                            </div>
+                                            {msg.data.recentTrades && msg.data.recentTrades.length > 0 && (
+                                                <div style={{ marginTop: '12px', paddingTop: '12px', borderTop: '1px solid var(--border-color)' }}>
+                                                    <div style={{ fontSize: '11px', color: 'var(--text-secondary)', marginBottom: '8px', fontWeight: 600 }}>RECENT TRADES</div>
+                                                    {msg.data.recentTrades.slice(0, 4).map((t, i) => (
+                                                        <div key={i} style={{ display: 'flex', justifyContent: 'space-between', fontSize: '12px', padding: '4px 0', color: 'var(--text-secondary)' }}>
+                                                            <span>{t.agent} <span style={{ color: t.action === 'BUY' ? 'var(--accent-green)' : 'var(--accent-red)', fontWeight: 600 }}>{t.action}</span> {t.symbol}</span>
+                                                            <span className="mono">{formatCurrency(t.value)}</span>
+                                                        </div>
+                                                    ))}
+                                                </div>
+                                            )}
+                                        </div>
+                                    )}
+
+                                    {/* Trades List Card */}
+                                    {msg.type === 'trades' && msg.data && (
+                                        <div style={{ marginTop: '16px', padding: '16px', background: 'rgba(0,0,0,0.3)', borderRadius: '8px', border: '1px solid var(--border-color)' }}>
+                                            {msg.data.trades.map((t, i) => (
+                                                <div key={i} style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '8px 0', borderBottom: i < msg.data.trades.length - 1 ? '1px solid rgba(255,255,255,0.05)' : 'none', fontSize: '13px' }}>
+                                                    <div style={{ flex: 2 }}>
+                                                        <span style={{ fontWeight: 600, marginRight: '6px' }}>{t.agent}</span>
+                                                        <span style={{ color: t.action === 'BUY' ? 'var(--accent-green)' : 'var(--accent-red)', fontWeight: 600 }}>{t.action}</span>
+                                                        <span style={{ marginLeft: '6px' }}>{t.symbol}</span>
+                                                    </div>
+                                                    <div className="mono" style={{ flex: 1, textAlign: 'center' }}>{t.qty} @ {formatCurrency(t.price)}</div>
+                                                    <div className="mono" style={{ flex: 1, textAlign: 'right', fontWeight: 600 }}>{formatCurrency(t.value)}</div>
+                                                </div>
+                                            ))}
+                                        </div>
+                                    )}
+
                                     {/* Portfolio Rebalance Card - now with real data */}
                                     {msg.type === 'rebalance' && msg.data && (
                                         <div style={{ marginTop: '16px', padding: '16px', background: 'rgba(0,0,0,0.3)', borderRadius: '8px', border: '1px solid var(--border-color)' }}>
@@ -179,7 +241,7 @@ const AIChat = () => {
                                 type="text"
                                 value={inputValue}
                                 onChange={(e) => setInputValue(e.target.value)}
-                                placeholder="Ask AgentFi... (e.g. 'Analyze BTC', 'Review my portfolio', 'Market overview')"
+                                placeholder="Ask about your agents, trades, or market... (e.g. 'What are my agents doing?')"
                                 style={{ flex: 1, padding: '16px 20px', borderRadius: '24px', border: '1px solid var(--border-color)', background: 'rgba(255,255,255,0.02)', color: 'white', fontSize: '15px', outline: 'none' }}
                             />
                             <button type="submit" disabled={!inputValue.trim() || isTyping} className="hover-glow" style={{
@@ -201,8 +263,9 @@ const AIChat = () => {
                         <h3 style={{ marginBottom: '16px', fontSize: '16px' }}>Quick Actions</h3>
                         <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
                             {[
+                                "What are my agents doing?",
+                                "Show recent trades",
                                 "Analyze BTC",
-                                "Analyze ETH",
                                 "Review my portfolio",
                                 "Market overview",
                                 "Suggest a strategy"
@@ -221,10 +284,10 @@ const AIChat = () => {
                     <div className="glass-panel" style={{ padding: '24px', flex: 1 }}>
                         <h3 style={{ marginBottom: '16px', fontSize: '16px' }}>AI Capabilities</h3>
                         <div style={{ fontSize: '13px', color: 'var(--text-secondary)', display: 'flex', flexDirection: 'column', gap: '12px' }}>
-                            <div>📊 <strong>Technical Analysis</strong> — RSI, SMA, EMA, Momentum, Volatility</div>
-                            <div>💼 <strong>Portfolio Review</strong> — Risk scoring, rebalance suggestions</div>
-                            <div>📈 <strong>Live Market Data</strong> — Real prices from CoinGecko & Yahoo Finance</div>
-                            <div>🤖 <strong>Strategy Advisor</strong> — Context-aware recommendations</div>
+                            <div>🤖 <strong>Agent Monitor</strong> — Live status, positions & decisions</div>
+                            <div>📊 <strong>Trade History</strong> — Real-time buy/sell activity</div>
+                            <div>💼 <strong>Portfolio Review</strong> — Risk scores from live holdings</div>
+                            <div>📈 <strong>Technical Analysis</strong> — RSI, SMA, EMA with agent exposure</div>
                         </div>
                     </div>
                 </div>
