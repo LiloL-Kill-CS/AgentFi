@@ -14,8 +14,14 @@ market_service = MarketDataService()
 # Virtual wallets for each agent
 _wallets: Dict[int, dict] = {}
 _trade_history: Dict[int, List[dict]] = {}
+_agent_statuses: Dict[int, str] = {}  # {agent_id: "active"/"paused"}
 _is_running = False
 _save_counter = 0  # Save every N ticks to avoid excessive disk I/O
+
+
+def set_agent_status(agent_id: int, status: str):
+    """Called by agents route when toggling."""
+    _agent_statuses[agent_id] = status
 
 
 def initialize_agent_wallet(agent_id: int, capital: float, strategy: str, asset: str):
@@ -152,6 +158,8 @@ async def run_simulation_tick():
     price_map = {p["symbol"]: p["price"] for p in prices}
 
     for agent_id, wallet in _wallets.items():
+        # Skip paused agents — only update prices, don't trade
+        status = _agent_statuses.get(agent_id, "active")
         strategy = wallet["strategy"]
         asset_focus = wallet["asset_focus"]
 
@@ -169,6 +177,10 @@ async def run_simulation_tick():
 
             if symbol in wallet["positions"]:
                 wallet["positions"][symbol]["currentPrice"] = current_price
+
+            # Don't trade if agent is paused
+            if status != "active":
+                continue
 
             should_buy, should_sell, qty_factor = _decide(strategy, wallet, symbol, current_price)
 

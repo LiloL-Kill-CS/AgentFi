@@ -1,159 +1,160 @@
 {
   "1": {
     "initial_capital": 25000,
-    "cash": 4538.459636096385,
+    "cash": 2621.4460433088825,
     "positions": {
       "BTC": {
-        "qty": 0.1824291129688593,
-        "avgEntry": 64116.5701193719,
-        "currentPrice": 64132
+        "qty": 0.0651978379926001,
+        "avgEntry": 64063.9881389393,
+        "currentPrice": 64051
       },
       "ETH": {
-        "qty": 2.1502845520680776,
-        "avgEntry": 1872.6171043916584,
-        "currentPrice": 1873.61
+        "qty": 6.5648069777099645,
+        "avgEntry": 1869.947424166221,
+        "currentPrice": 1870.01
       },
       "SOL": {
-        "qty": 62.25018523243348,
-        "avgEntry": 79.2778437913771,
-        "currentPrice": 79.31
+        "qty": 77.26824613064721,
+        "avgEntry": 79.06950038272595,
+        "currentPrice": 79.04
       }
     },
-    "total_value": 25203.86,
-    "pnl": 203.86,
-    "pnl_pct": 0.82,
-    "trades_count": 337,
-    "wins": 138,
-    "losses": 22,
+    "total_value": 25180.97,
+    "pnl": 180.97,
+    "pnl_pct": 0.72,
+    "trades_count": 462,
+    "wins": 167,
+    "losses": 46,
     "strategy": "Trend Following",
     "asset_focus": "Crypto (BTC/ETH)",
     "last_trade": {
-      "timestamp": 1772278047.7460418,
-      "symbol": "ETH",
+      "timestamp": 1772279332.9834013,
+      "symbol": "SOL",
       "action": "BUY",
-      "qty": 0.427639,
-      "price": 1873.61,
-      "value": 801.23,
+      "qty": 8.372828,
+      "price": 79.04,
+      "value": 661.79,
       "success": true
     },
     "started_at": 1772273869.0844035
   },
   "2": {
     "initial_capital": 30000,
-    "cash": 10659.417278267563,
+    "cash": 12958.282194843807,
     "positions": {
       "AAPL": {
-        "qty": 37.75474924356212,
-        "avgEntry": 178.1222963941521,
-        "currentPrice": 178.31
+        "qty": 10.759661307385635,
+        "avgEntry": 178.59819302899913,
+        "currentPrice": 176.23
       },
       "NVDA": {
-        "qty": 4.931767857319105,
-        "avgEntry": 890.9925085454247,
-        "currentPrice": 888.24
+        "qty": 7.64789566240303,
+        "avgEntry": 885.8685327130339,
+        "currentPrice": 890.77
       },
       "MSFT": {
-        "qty": 19.206032442734124,
-        "avgEntry": 412.9304224441973,
-        "currentPrice": 405.51
+        "qty": 18.89746449615087,
+        "avgEntry": 407.9798748595003,
+        "currentPrice": 406.78
       }
     },
-    "total_value": 29560.3,
-    "pnl": -439.7,
-    "pnl_pct": -1.47,
-    "trades_count": 277,
-    "wins": 58,
-    "losses": 62,
+    "total_value": 29354.08,
+    "pnl": -645.92,
+    "pnl_pct": -2.15,
+    "trades_count": 361,
+    "wins": 78,
+    "losses": 86,
     "strategy": "Volatility Breakout",
     "asset_focus": "Stocks (AAPL/NVDA/MSFT)",
     "last_trade": {
-      "timestamp": 1772278057.7550933,
-      "symbol": "AAPL",
-      "action": "BUY",
-      "qty": 20.812754,
-      "price": 178.31,
-      "value": 3711.12,
-      "success": true
+      "timestamp": 1772279342.9954727,
+      "symbol": "MSFT",
+      "action": "SELL",
+      "qty": 17.626084,
+      "price": 406.78,
+      "value": 7169.94,
+      "success": true,
+      "pnl": -21.15
     },
     "started_at": 1772273869.0859938
   },
   "3": {
     "initial_capital": 15000,
-    "cash": 10253.647240994396,
+    "cash": 10505.66427070343,
     "positions": {
       "ETH": {
-        "qty": 0.5734394904810585,
-        "avgEntry": 1873.3389979791746,
-        "currentPrice": 1873.61
+        "qty": 0.7492183295566986,
+        "avgEntry": 1869.358850805668,
+        "currentPrice": 1870.01
       },
       "BTC": {
-        "qty": 0.0048384669939257685,
-        "avgEntry": 64087.17866392838,
-        "currentPrice": 64132
+        "qty": 0.01766723294560965,
+        "avgEntry": 64100.478685494505,
+        "currentPrice": 64051
       },
       "SOL": {
-        "qty": 43.713018499197034,
-        "avgEntry": 79.26945972494204,
-        "currentPrice": 79.31
+        "qty": 25.89148010194433,
+        "avgEntry": 79.30787345895057,
+        "currentPrice": 79.04
       }
     },
-    "total_value": 15105.23,
-    "pnl": 105.23,
-    "pnl_pct": 0.7,
-    "trades_count": 237,
-    "wins": 99,
-    "losses": 24,
+    "total_value": 15084.78,
+    "pnl": 84.78,
+    "pnl_pct": 0.57,
+    "trades_count": 303,
+    "wins": 115,
+    "losses": 40,
     "strategy": "Mean Reversion",
     "asset_focus": "Crypto (BTC/ETH)",
     "last_trade": {
-      "timestamp": 1772278047.7461333,
-      "symbol": "SOL",
+      "timestamp": 1772279342.995485,
+      "symbol": "ETH",
       "action": "SELL",
-      "qty": 17.169266,
-      "price": 79.31,
-      "value": 1361.69,
+      "qty": 0.18777,
+      "price": 1870.01,
+      "value": 351.13,
       "success": true,
-      "pnl": 0.7
+      "pnl": 0.12
     },
     "started_at": 1772273869.0870852
   },
   "4": {
     "initial_capital": 10000,
-    "cash": 6227.129452369864,
+    "cash": 6803.093491254494,
     "positions": {
       "ETH": {
-        "qty": 0.27471815672357697,
-        "avgEntry": 1873.410410762743,
-        "currentPrice": 1873.61
+        "qty": 1.01884913214439,
+        "avgEntry": 1868.734037854317,
+        "currentPrice": 1870.01
       },
       "BTC": {
-        "qty": 0.022178771280357047,
-        "avgEntry": 64129.300454763616,
-        "currentPrice": 64132
+        "qty": 0.007493237517165991,
+        "avgEntry": 64022.7378311274,
+        "currentPrice": 64051
       },
       "SOL": {
-        "qty": 23.817870986106676,
-        "avgEntry": 79.30574034737228,
-        "currentPrice": 79.31
+        "qty": 10.865030640777588,
+        "avgEntry": 78.99698409812598,
+        "currentPrice": 79.04
       }
     },
-    "total_value": 10053.21,
-    "pnl": 53.21,
-    "pnl_pct": 0.53,
-    "trades_count": 594,
-    "wins": 195,
-    "losses": 82,
+    "total_value": 10047.07,
+    "pnl": 47.07,
+    "pnl_pct": 0.47,
+    "trades_count": 767,
+    "wins": 222,
+    "losses": 127,
     "strategy": "High Frequency",
     "asset_focus": "Crypto (SOL/AVAX/MATIC)",
     "last_trade": {
-      "timestamp": 1772278047.7461462,
-      "symbol": "ETH",
+      "timestamp": 1772279342.9954967,
+      "symbol": "BTC",
       "action": "SELL",
-      "qty": 0.180476,
-      "price": 1873.61,
-      "value": 338.14,
+      "qty": 0.005813,
+      "price": 64051,
+      "value": 372.34,
       "success": true,
-      "pnl": 0.04
+      "pnl": 0.16
     },
     "started_at": 1772273869.0880337
   }

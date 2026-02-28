@@ -4,7 +4,7 @@
     "name": "Alpha Momentum",
     "strategy": "Trend Following",
     "asset": "Crypto (BTC/ETH)",
-    "status": "active",
+    "status": "paused",
     "capital": 25000
   },
   {
@@ -12,7 +12,7 @@
     "name": "Tech Breakout",
     "strategy": "Volatility Breakout",
     "asset": "Stocks (AAPL/NVDA/MSFT)",
-    "status": "active",
+    "status": "paused",
     "capital": 30000
   },
   {
@@ -20,7 +20,7 @@
     "name": "Stable Yield",
     "strategy": "Mean Reversion",
     "asset": "Crypto (BTC/ETH)",
-    "status": "active",
+    "status": "paused",
     "capital": 15000
   },
   {
@@ -28,7 +28,7 @@
     "name": "Altcoin Scalper",
     "strategy": "High Frequency",
     "asset": "Crypto (SOL/AVAX/MATIC)",
-    "status": "active",
+    "status": "paused",
     "capital": 10000
   }
 ]

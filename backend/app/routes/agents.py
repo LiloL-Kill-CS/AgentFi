@@ -5,7 +5,7 @@ Persists agent configs to disk so they survive restarts.
 import time
 from fastapi import APIRouter
 from pydantic import BaseModel
-from app.services.simulator import get_wallet, get_all_wallets, get_trade_history, initialize_agent_wallet
+from app.services.simulator import get_wallet, get_all_wallets, get_trade_history, initialize_agent_wallet, set_agent_status
 from app.services.persistence import save_agents, load_agents
 
 router = APIRouter()
@@ -102,6 +102,7 @@ async def toggle_agent(agent_id: int):
     if not agent:
         return {"error": "Agent not found"}
     agent["status"] = "paused" if agent["status"] == "active" else "active"
+    set_agent_status(agent_id, agent["status"])
     save_agents(_agents)
     return {"message": f"Agent '{agent['name']}' is now {agent['status']}", "agent": agent}
 
