@@ -1,7 +1,8 @@
 /**
  * AgentFi API Client — Connects the frontend to the FastAPI backend.
+ * Set VITE_API_URL in .env for cloud deployment, defaults to localhost for dev.
  */
-const API_BASE = 'http://localhost:8000/api';
+const API_BASE = import.meta.env.VITE_API_URL || 'http://localhost:8000/api';
 
 async function request(endpoint, options = {}) {
     try {
