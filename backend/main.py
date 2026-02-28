@@ -7,7 +7,7 @@ from contextlib import asynccontextmanager
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
-from app.routes import market, portfolio, agents, chat
+from app.routes import market, portfolio, agents, chat, dashboard
 from app.services.market_data import MarketDataService
 from app.services.simulator import start_simulation_loop
 
@@ -39,6 +39,7 @@ app.add_middleware(
 )
 
 # Include routers
+app.include_router(dashboard.router, prefix="/api/dashboard", tags=["Dashboard"])
 app.include_router(market.router, prefix="/api/market", tags=["Market Data"])
 app.include_router(portfolio.router, prefix="/api/portfolio", tags=["Portfolio"])
 app.include_router(agents.router, prefix="/api/agents", tags=["AI Agents"])

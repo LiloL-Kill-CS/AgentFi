@@ -1,0 +1,538 @@
+{
+  "1": [
+    {
+      "timestamp": 1772273879.0942795,
+      "symbol": "BTC",
+      "action": "BUY",
+      "qty": 0.066834,
+      "price": 63589,
+      "value": 4249.92,
+      "success": true
+    },
+    {
+      "timestamp": 1772273889.0965846,
+      "symbol": "ETH",
+      "action": "BUY",
+      "qty": 2.443201,
+      "price": 1852.84,
+      "value": 4526.86,
+      "success": true
+    },
+    {
+      "timestamp": 1772273899.1039126,
+      "symbol": "BTC",
+      "action": "BUY",
+      "qty": 0.032253,
+      "price": 63589,
+      "value": 2050.93,
+      "success": true
+    },
+    {
+      "timestamp": 1772273899.103954,
+      "symbol": "SOL",
+      "action": "BUY",
+      "qty": 24.691043,
+      "price": 78.11,
+      "value": 1928.62,
+      "success": true
+    },
+    {
+      "timestamp": 1772273919.1215432,
+      "symbol": "SOL",
+      "action": "SELL",
+      "qty": 6.587104,
+      "price": 78.11,
+      "value": 514.52,
+      "success": true,
+      "pnl": 0.0
+    },
+    {
+      "timestamp": 1772273939.1427577,
+      "symbol": "BTC",
+      "action": "BUY",
+      "qty": 0.037373,
+      "price": 63648,
+      "value": 2378.72,
+      "success": true
+    },
+    {
+      "timestamp": 1772273949.1456628,
+      "symbol": "ETH",
+      "action": "SELL",
+      "qty": 0.428772,
+      "price": 1855.06,
+      "value": 795.4,
+      "success": true,
+      "pnl": 0.95
+    },
+    {
+      "timestamp": 1772273979.171613,
+      "symbol": "BTC",
+      "action": "SELL",
+      "qty": 0.023447,
+      "price": 63648,
+      "value": 1492.36,
+      "success": true,
+      "pnl": 1.0
+    },
+    {
+      "timestamp": 1772273999.1853535,
+      "symbol": "SOL",
+      "action": "SELL",
+      "qty": 4.6534,
+      "price": 78.27,
+      "value": 364.22,
+      "success": true,
+      "pnl": 0.74
+    },
+    {
+      "timestamp": 1772274009.198197,
+      "symbol": "BTC",
+      "action": "BUY",
+      "qty": 0.026812,
+      "price": 63706,
+      "value": 1708.09,
+      "success": true
+    },
+    {
+      "timestamp": 1772274019.2095363,
+      "symbol": "SOL",
+      "action": "BUY",
+      "qty": 33.985921,
+      "price": 78.27,
+      "value": 2660.08,
+      "success": true
+    },
+    {
+      "timestamp": 1772274029.223093,
+      "symbol": "SOL",
+      "action": "SELL",
+      "qty": 10.174969,
+      "price": 78.27,
+      "value": 796.39,
+      "success": true,
+      "pnl": 0.46
+    },
+    {
+      "timestamp": 1772274059.2419941,
+      "symbol": "BTC",
+      "action": "BUY",
+      "qty": 0.035956,
+      "price": 63741,
+      "value": 2291.87,
+      "success": true
+    },
+    {
+      "timestamp": 1772274069.2552586,
+      "symbol": "ETH",
+      "action": "SELL",
+      "qty": 0.349982,
+      "price": 1856.7,
+      "value": 649.81,
+      "success": true,
+      "pnl": 1.35
+    },
+    {
+      "timestamp": 1772274079.264233,
+      "symbol": "BTC",
+      "action": "BUY",
+      "qty": 0.015779,
+      "price": 63741,
+      "value": 1005.76,
+      "success": true
+    },
+    {
+      "timestamp": 1772274079.264305,
+      "symbol": "SOL",
+      "action": "SELL",
+      "qty": 9.575651,
+      "price": 78.29,
+      "value": 749.68,
+      "success": true,
+      "pnl": 0.63
+    }
+  ],
+  "2": [
+    {
+      "timestamp": 1772273909.118655,
+      "symbol": "AAPL",
+      "action": "BUY",
+      "qty": 38.746691,
+      "price": 180.0,
+      "value": 6974.4,
+      "success": true
+    },
+    {
+      "timestamp": 1772273919.1216059,
+      "symbol": "NVDA",
+      "action": "BUY",
+      "qty": 7.01084,
+      "price": 875.02,
+      "value": 6134.63,
+      "success": true
+    },
+    {
+      "timestamp": 1772273959.1483788,
+      "symbol": "NVDA",
+      "action": "SELL",
+      "qty": 1.978315,
+      "price": 874.39,
+      "value": 1729.82,
+      "success": true,
+      "pnl": -1.25
+    },
+    {
+      "timestamp": 1772273979.1716707,
+      "symbol": "AAPL",
+      "action": "BUY",
+      "qty": 22.167985,
+      "price": 179.75,
+      "value": 3984.7,
+      "success": true
+    },
+    {
+      "timestamp": 1772273989.1796544,
+      "symbol": "AAPL",
+      "action": "SELL",
+      "qty": 20.916946,
+      "price": 179.75,
+      "value": 3759.82,
+      "success": true,
+      "pnl": -3.33
+    },
+    {
+      "timestamp": 1772273999.185403,
+      "symbol": "AAPL",
+      "action": "BUY",
+      "qty": 25.083546,
+      "price": 177.4,
+      "value": 4449.82,
+      "success": true
+    },
+    {
+      "timestamp": 1772273999.1854212,
+      "symbol": "NVDA",
+      "action": "BUY",
+      "qty": 4.59566,
+      "price": 874.88,
+      "value": 4020.65,
+      "success": true
+    },
+    {
+      "timestamp": 1772274039.2244196,
+      "symbol": "MSFT",
+      "action": "BUY",
+      "qty": 8.411216,
+      "price": 406.32,
+      "value": 3417.65,
+      "success": true
+    },
+    {
+      "timestamp": 1772274049.226919,
+      "symbol": "NVDA",
+      "action": "SELL",
+      "qty": 3.235735,
+      "price": 879.26,
+      "value": 2845.05,
+      "success": true,
+      "pnl": 13.94
+    }
+  ],
+  "3": [
+    {
+      "timestamp": 1772273889.0966265,
+      "symbol": "ETH",
+      "action": "BUY",
+      "qty": 1.426023,
+      "price": 1852.84,
+      "value": 2642.19,
+      "success": true
+    },
+    {
+      "timestamp": 1772273929.1348522,
+      "symbol": "BTC",
+      "action": "BUY",
+      "qty": 0.025035,
+      "price": 63589,
+      "value": 1591.97,
+      "success": true
+    },
+    {
+      "timestamp": 1772273959.1484292,
+      "symbol": "BTC",
+      "action": "SELL",
+      "qty": 0.008846,
+      "price": 63648,
+      "value": 563.01,
+      "success": true,
+      "pnl": 0.52
+    },
+    {
+      "timestamp": 1772273969.1624906,
+      "symbol": "ETH",
+      "action": "BUY",
+      "qty": 1.005949,
+      "price": 1855.06,
+      "value": 1866.1,
+      "success": true
+    },
+    {
+      "timestamp": 1772273999.1854389,
+      "symbol": "ETH",
+      "action": "BUY",
+      "qty": 0.545156,
+      "price": 1856.65,
+      "value": 1012.16,
+      "success": true
+    },
+    {
+      "timestamp": 1772274079.2645035,
+      "symbol": "SOL",
+      "action": "BUY",
+      "qty": 18.102251,
+      "price": 78.29,
+      "value": 1417.23,
+      "success": true
+    }
+  ],
+  "4": [
+    {
+      "timestamp": 1772273889.0966384,
+      "symbol": "ETH",
+      "action": "BUY",
+      "qty": 0.801807,
+      "price": 1852.84,
+      "value": 1485.62,
+      "success": true
+    },
+    {
+      "timestamp": 1772273899.1039813,
+      "symbol": "BTC",
+      "action": "BUY",
+      "qty": 0.015008,
+      "price": 63589,
+      "value": 954.31,
+      "success": true
+    },
+    {
+      "timestamp": 1772273899.1039953,
+      "symbol": "ETH",
+      "action": "BUY",
+      "qty": 0.59831,
+      "price": 1852.84,
+      "value": 1108.57,
+      "success": true
+    },
+    {
+      "timestamp": 1772273909.1187348,
+      "symbol": "BTC",
+      "action": "SELL",
+      "qty": 0.007491,
+      "price": 63589,
+      "value": 476.34,
+      "success": true,
+      "pnl": 0.0
+    },
+    {
+      "timestamp": 1772273909.1187644,
+      "symbol": "ETH",
+      "action": "SELL",
+      "qty": 0.626214,
+      "price": 1852.84,
+      "value": 1160.27,
+      "success": true,
+      "pnl": 0.0
+    },
+    {
+      "timestamp": 1772273919.1216388,
+      "symbol": "ETH",
+      "action": "SELL",
+      "qty": 0.338577,
+      "price": 1852.84,
+      "value": 627.33,
+      "success": true,
+      "pnl": 0.0
+    },
+    {
+      "timestamp": 1772273919.1216564,
+      "symbol": "SOL",
+      "action": "BUY",
+      "qty": 9.301857,
+      "price": 78.11,
+      "value": 726.57,
+      "success": true
+    },
+    {
+      "timestamp": 1772273939.1427999,
+      "symbol": "BTC",
+      "action": "BUY",
+      "qty": 0.012718,
+      "price": 63648,
+      "value": 809.46,
+      "success": true
+    },
+    {
+      "timestamp": 1772273949.1457162,
+      "symbol": "BTC",
+      "action": "SELL",
+      "qty": 0.011047,
+      "price": 63648,
+      "value": 703.14,
+      "success": true,
+      "pnl": 0.24
+    },
+    {
+      "timestamp": 1772273949.1457374,
+      "symbol": "SOL",
+      "action": "SELL",
+      "qty": 3.996031,
+      "price": 78.19,
+      "value": 312.45,
+      "success": true,
+      "pnl": 0.32
+    },
+    {
+      "timestamp": 1772273959.1484756,
+      "symbol": "BTC",
+      "action": "BUY",
+      "qty": 0.013527,
+      "price": 63648,
+      "value": 860.95,
+      "success": true
+    },
+    {
+      "timestamp": 1772273979.1716964,
+      "symbol": "BTC",
+      "action": "BUY",
+      "qty": 0.011844,
+      "price": 63648,
+      "value": 753.84,
+      "success": true
+    },
+    {
+      "timestamp": 1772273989.1796935,
+      "symbol": "BTC",
+      "action": "SELL",
+      "qty": 0.014347,
+      "price": 63648,
+      "value": 913.18,
+      "success": true,
+      "pnl": 0.08
+    },
+    {
+      "timestamp": 1772273999.1854534,
+      "symbol": "BTC",
+      "action": "BUY",
+      "qty": 0.01308,
+      "price": 63706,
+      "value": 833.27,
+      "success": true
+    },
+    {
+      "timestamp": 1772274019.2095997,
+      "symbol": "BTC",
+      "action": "SELL",
+      "qty": 0.016776,
+      "price": 63706,
+      "value": 1068.73,
+      "success": true,
+      "pnl": 0.65
+    },
+    {
+      "timestamp": 1772274019.2096145,
+      "symbol": "ETH",
+      "action": "SELL",
+      "qty": 0.16917,
+      "price": 1856.65,
+      "value": 314.09,
+      "success": true,
+      "pnl": 0.64
+    },
+    {
+      "timestamp": 1772274019.2096243,
+      "symbol": "SOL",
+      "action": "SELL",
+      "qty": 2.280835,
+      "price": 78.27,
+      "value": 178.52,
+      "success": true,
+      "pnl": 0.36
+    },
+    {
+      "timestamp": 1772274029.2231476,
+      "symbol": "ETH",
+      "action": "BUY",
+      "qty": 0.571777,
+      "price": 1856.65,
+      "value": 1061.59,
+      "success": true
+    },
+    {
+      "timestamp": 1772274039.2244835,
+      "symbol": "BTC",
+      "action": "SELL",
+      "qty": 0.005504,
+      "price": 63706,
+      "value": 350.62,
+      "success": true,
+      "pnl": 0.21
+    },
+    {
+      "timestamp": 1772274039.2245023,
+      "symbol": "SOL",
+      "action": "BUY",
+      "qty": 14.353284,
+      "price": 78.27,
+      "value": 1123.43,
+      "success": true
+    },
+    {
+      "timestamp": 1772274049.2269793,
+      "symbol": "ETH",
+      "action": "SELL",
+      "qty": 0.364334,
+      "price": 1856.65,
+      "value": 676.44,
+      "success": true,
+      "pnl": 0.44
+    },
+    {
+      "timestamp": 1772274049.227009,
+      "symbol": "SOL",
+      "action": "SELL",
+      "qty": 9.561396,
+      "price": 78.27,
+      "value": 748.37,
+      "success": true,
+      "pnl": 0.27
+    },
+    {
+      "timestamp": 1772274059.242089,
+      "symbol": "SOL",
+      "action": "SELL",
+      "qty": 2.63538,
+      "price": 78.29,
+      "value": 206.32,
+      "success": true,
+      "pnl": 0.13
+    },
+    {
+      "timestamp": 1772274069.2553356,
+      "symbol": "SOL",
+      "action": "BUY",
+      "qty": 10.292242,
+      "price": 78.29,
+      "value": 805.78,
+      "success": true
+    },
+    {
+      "timestamp": 1772274079.264562,
+      "symbol": "BTC",
+      "action": "BUY",
+      "qty": 0.016126,
+      "price": 63741,
+      "value": 1027.9,
+      "success": true
+    }
+  ]
+}

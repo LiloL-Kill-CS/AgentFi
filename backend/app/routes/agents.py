@@ -1,50 +1,32 @@
 """
 AI Agents API routes — manages trading bot configurations + simulation wallets.
+Persists agent configs to disk so they survive restarts.
 """
 import time
 from fastapi import APIRouter
 from pydantic import BaseModel
 from app.services.simulator import get_wallet, get_all_wallets, get_trade_history, initialize_agent_wallet
+from app.services.persistence import save_agents, load_agents
 
 router = APIRouter()
 
-# Agent configs (simulation wallets are managed by simulator.py)
-_agents = [
-    {
-        "id": 1,
-        "name": "Alpha Momentum",
-        "strategy": "Trend Following",
-        "asset": "Crypto (BTC/ETH)",
-        "status": "active",
-        "capital": 25000,
-    },
-    {
-        "id": 2,
-        "name": "Tech Breakout",
-        "strategy": "Volatility Breakout",
-        "asset": "Stocks (AAPL/NVDA/MSFT)",
-        "status": "active",
-        "capital": 30000,
-    },
-    {
-        "id": 3,
-        "name": "Stable Yield",
-        "strategy": "Mean Reversion",
-        "asset": "Crypto (BTC/ETH)",
-        "status": "active",
-        "capital": 15000,
-    },
-    {
-        "id": 4,
-        "name": "Altcoin Scalper",
-        "strategy": "High Frequency",
-        "asset": "Crypto (SOL/AVAX/MATIC)",
-        "status": "active",
-        "capital": 10000,
-    },
-]
+# Load agents from disk on module import
+_agents = load_agents()
+if not _agents:
+    _agents = [
+        {"id": 1, "name": "Alpha Momentum", "strategy": "Trend Following", "asset": "Crypto (BTC/ETH)", "status": "active", "capital": 25000},
+        {"id": 2, "name": "Tech Breakout", "strategy": "Volatility Breakout", "asset": "Stocks (AAPL/NVDA/MSFT)", "status": "active", "capital": 30000},
+        {"id": 3, "name": "Stable Yield", "strategy": "Mean Reversion", "asset": "Crypto (BTC/ETH)", "status": "active", "capital": 15000},
+        {"id": 4, "name": "Altcoin Scalper", "strategy": "High Frequency", "asset": "Crypto (SOL/AVAX/MATIC)", "status": "active", "capital": 10000},
+    ]
+    save_agents(_agents)
 
-_next_id = 5
+_next_id = max((a["id"] for a in _agents), default=0) + 1
+
+
+def get_agents_list():
+    """Expose agent list for other modules."""
+    return _agents
 
 
 @router.get("/")
@@ -86,17 +68,12 @@ async def list_agents():
 
 @router.get("/{agent_id}")
 async def get_agent(agent_id: int):
-    """Get detailed agent info with wallet and trade history."""
     agent = next((a for a in _agents if a["id"] == agent_id), None)
     if not agent:
         return {"error": "Agent not found"}
     wallet = get_wallet(agent_id)
     history = get_trade_history(agent_id)
-    return {
-        **agent,
-        "wallet": wallet,
-        "tradeHistory": history[-20:],  # last 20 trades
-    }
+    return {**agent, "wallet": wallet, "tradeHistory": history[-20:]}
 
 
 class CreateAgentRequest(BaseModel):
@@ -107,17 +84,13 @@ class CreateAgentRequest(BaseModel):
 
 @router.post("/create")
 async def create_agent(req: CreateAgentRequest):
-    """Deploy a new AI trading agent with virtual funds."""
     global _next_id
     new_agent = {
-        "id": _next_id,
-        "name": req.name,
-        "strategy": req.strategy,
-        "asset": req.asset,
-        "status": "active",
-        "capital": req.capital,
+        "id": _next_id, "name": req.name, "strategy": req.strategy,
+        "asset": req.asset, "status": "active", "capital": req.capital,
     }
     _agents.append(new_agent)
+    save_agents(_agents)
     initialize_agent_wallet(_next_id, req.capital, req.strategy, req.asset)
     _next_id += 1
     return {"message": f"Agent '{req.name}' deployed with ${req.capital:,.2f} virtual funds", "agent": new_agent}
@@ -125,11 +98,11 @@ async def create_agent(req: CreateAgentRequest):
 
 @router.post("/{agent_id}/toggle")
 async def toggle_agent(agent_id: int):
-    """Pause or resume an agent."""
     agent = next((a for a in _agents if a["id"] == agent_id), None)
     if not agent:
         return {"error": "Agent not found"}
     agent["status"] = "paused" if agent["status"] == "active" else "active"
+    save_agents(_agents)
     return {"message": f"Agent '{agent['name']}' is now {agent['status']}", "agent": agent}
 
 

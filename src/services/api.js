@@ -63,3 +63,8 @@ export const chatAPI = {
 export const healthAPI = {
     check: () => request('/health'),
 };
+
+// ── Dashboard ───────────────────────────────────────────
+export const dashboardAPI = {
+    getStats: () => request('/dashboard/stats'),
+};

@@ -1,12 +1,13 @@
 """
-Trading Simulator — Gives each AI agent virtual funds to simulate trades and track PnL in real-time.
-Uses real market data from CoinGecko to feed price movements into trading strategies.
+Trading Simulator — Gives each AI agent virtual funds to simulate trades.
+Uses real market data from CoinGecko and persists all data to disk.
 """
 import asyncio
 import random
 import time
 from typing import Dict, List
 from app.services.market_data import MarketDataService
+from app.services.persistence import save_wallets, load_wallets, save_trades, load_trades
 
 market_service = MarketDataService()
 
@@ -14,6 +15,7 @@ market_service = MarketDataService()
 _wallets: Dict[int, dict] = {}
 _trade_history: Dict[int, List[dict]] = {}
 _is_running = False
+_save_counter = 0  # Save every N ticks to avoid excessive disk I/O
 
 
 def initialize_agent_wallet(agent_id: int, capital: float, strategy: str, asset: str):
@@ -21,7 +23,7 @@ def initialize_agent_wallet(agent_id: int, capital: float, strategy: str, asset:
     _wallets[agent_id] = {
         "initial_capital": capital,
         "cash": capital,
-        "positions": {},  # {symbol: {qty, avgEntry, currentPrice}}
+        "positions": {},
         "total_value": capital,
         "pnl": 0,
         "pnl_pct": 0,
@@ -34,6 +36,7 @@ def initialize_agent_wallet(agent_id: int, capital: float, strategy: str, asset:
         "started_at": time.time(),
     }
     _trade_history[agent_id] = []
+    _persist()
 
 
 def get_wallet(agent_id: int) -> dict:
@@ -46,6 +49,28 @@ def get_trade_history(agent_id: int) -> List[dict]:
 
 def get_all_wallets() -> Dict[int, dict]:
     return _wallets
+
+
+def _persist():
+    """Save wallets and trades to disk."""
+    try:
+        save_wallets(_wallets)
+        save_trades(_trade_history)
+    except Exception as e:
+        print(f"[Persistence] save error: {e}")
+
+
+def _load_from_disk():
+    """Load existing wallets and trades from disk."""
+    global _wallets, _trade_history
+    loaded_wallets = load_wallets()
+    loaded_trades = load_trades()
+    if loaded_wallets:
+        _wallets = loaded_wallets
+        print(f"[Simulator] Loaded {len(_wallets)} agent wallets from disk")
+    if loaded_trades:
+        _trade_history = loaded_trades
+        print(f"[Simulator] Loaded trade history for {len(_trade_history)} agents")
 
 
 def _execute_trade(agent_id: int, symbol: str, action: str, qty: float, price: float):
@@ -85,7 +110,6 @@ def _execute_trade(agent_id: int, symbol: str, action: str, qty: float, price: f
         if pos and pos["qty"] >= qty:
             revenue = qty * price
             wallet["cash"] += revenue
-            # Calculate profit/loss for this trade
             pnl = (price - pos["avgEntry"]) * qty
             if pnl > 0:
                 wallet["wins"] += 1
@@ -115,12 +139,12 @@ def _execute_trade(agent_id: int, symbol: str, action: str, qty: float, price: f
     if agent_id not in _trade_history:
         _trade_history[agent_id] = []
     _trade_history[agent_id].append(trade)
-    # Keep only last 100 trades
     _trade_history[agent_id] = _trade_history[agent_id][-100:]
 
 
 async def run_simulation_tick():
-    """One tick of the simulation loop — each active agent makes decisions."""
+    """One tick of the simulation loop."""
+    global _save_counter
     prices = market_service.get_all_prices()
     if not prices:
         return
@@ -131,7 +155,6 @@ async def run_simulation_tick():
         strategy = wallet["strategy"]
         asset_focus = wallet["asset_focus"]
 
-        # Determine which symbols to trade
         if "BTC" in asset_focus or "Crypto" in asset_focus:
             symbols = ["BTC", "ETH", "SOL"]
         elif "AAPL" in asset_focus or "Stock" in asset_focus:
@@ -144,17 +167,15 @@ async def run_simulation_tick():
             if not current_price or current_price <= 0:
                 continue
 
-            # Update position prices
             if symbol in wallet["positions"]:
                 wallet["positions"][symbol]["currentPrice"] = current_price
 
-            # Strategy-specific decision making
             should_buy, should_sell, qty_factor = _decide(strategy, wallet, symbol, current_price)
 
             if should_buy and wallet["cash"] > 100:
                 buy_amount = wallet["cash"] * qty_factor * random.uniform(0.5, 1.0)
                 qty = buy_amount / current_price
-                if qty * current_price >= 10:  # Min $10 trade
+                if qty * current_price >= 10:
                     _execute_trade(agent_id, symbol, "BUY", qty, current_price)
 
             elif should_sell and symbol in wallet["positions"]:
@@ -173,13 +194,18 @@ async def run_simulation_tick():
         wallet["pnl"] = round(wallet["total_value"] - wallet["initial_capital"], 2)
         wallet["pnl_pct"] = round((wallet["pnl"] / wallet["initial_capital"]) * 100, 2) if wallet["initial_capital"] > 0 else 0
 
+    # Auto-save every 3 ticks (30 seconds)
+    _save_counter += 1
+    if _save_counter >= 3:
+        _persist()
+        _save_counter = 0
+
 
 def _decide(strategy: str, wallet: dict, symbol: str, price: float) -> tuple:
-    """Strategy-specific trade decision. Returns (should_buy, should_sell, qty_factor)."""
+    """Strategy-specific trade decision."""
     pos = wallet["positions"].get(symbol)
 
     if strategy == "Trend Following":
-        # Follow momentum — buy on dips, sell on peaks
         r = random.random()
         if r < 0.15:
             return (True, False, 0.25)
@@ -212,7 +238,6 @@ def _decide(strategy: str, wallet: dict, symbol: str, price: float) -> tuple:
         return (False, False, 0)
 
     else:
-        # Default DCA strategy
         if random.random() < 0.08:
             return (True, False, 0.10)
         return (False, False, 0)
@@ -223,16 +248,20 @@ async def start_simulation_loop():
     global _is_running
     _is_running = True
 
-    # Initialize wallets for default agents
-    _default_agents = [
-        (1, 25000, "Trend Following", "Crypto (BTC/ETH)"),
-        (2, 30000, "Volatility Breakout", "Stocks (AAPL/NVDA/MSFT)"),
-        (3, 15000, "Mean Reversion", "Crypto (BTC/ETH)"),
-        (4, 10000, "High Frequency", "Crypto (SOL/AVAX/MATIC)"),
-    ]
-    for agent_id, capital, strategy, asset in _default_agents:
-        if agent_id not in _wallets:
+    # Load persisted data from disk first
+    _load_from_disk()
+
+    # Initialize default agents only if nothing was loaded
+    if not _wallets:
+        _default_agents = [
+            (1, 25000, "Trend Following", "Crypto (BTC/ETH)"),
+            (2, 30000, "Volatility Breakout", "Stocks (AAPL/NVDA/MSFT)"),
+            (3, 15000, "Mean Reversion", "Crypto (BTC/ETH)"),
+            (4, 10000, "High Frequency", "Crypto (SOL/AVAX/MATIC)"),
+        ]
+        for agent_id, capital, strategy, asset in _default_agents:
             initialize_agent_wallet(agent_id, capital, strategy, asset)
+        print("[Simulator] Initialized 4 default agents with virtual funds")
 
     while _is_running:
         try:
